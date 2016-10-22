@@ -52,7 +52,7 @@
 //
 // AppRegistry.registerComponent('HelloWorld', () => HelloWorld);
 import React, { Component } from 'react';
-import {AppRegistry, StyleSheet, Text,Image, View, TextInput} from 'react-native';
+import {AppRegistry, StyleSheet, Text,Image, View, TextInput, ScrollView, ListView} from 'react-native';
 
 class HelloWorldApp extends Component{
   render(){
@@ -281,11 +281,103 @@ class PizzaTranslator extends Component{
             onChangeText={(text)=>this.setState({text})}
           />
           <Text style={{padding: 10, fontSize:42}}>
-            {this.state.text.split(' ').map((word)=>word && '$').join(' ')}
+            {this.state.text}
           </Text>
         </View>
     );
   }
+}
+
+class IScrolledDownAndWhatHappenedNextShockedMe extends Component{
+    render(){
+        return(
+            <ScrollView>
+                <Text style={{fontSize:96}}>Scroll me plz</Text>
+                <Image source={require('./img/favicon.png')}/>
+                <Image source={require('./img/favicon.png')} />
+                <Image source={require('./img/favicon.png')} />
+                <Image source={require('./img/favicon.png')} />
+                <Image source={require('./img/favicon.png')} />
+                <Text style={{fontSize:96}}>If you like</Text>
+                <Image source={require('./img/favicon.png')} />
+                <Image source={require('./img/favicon.png')} />
+                <Image source={require('./img/favicon.png')} />
+                <Image source={require('./img/favicon.png')} />
+                <Image source={require('./img/favicon.png')} />
+                <Text style={{fontSize:96}}>Scrolling down</Text>
+                <Image source={require('./img/favicon.png')} />
+                <Image source={require('./img/favicon.png')} />
+                <Image source={require('./img/favicon.png')} />
+                <Image source={require('./img/favicon.png')} />
+                <Image source={require('./img/favicon.png')} />
+                <Text style={{fontSize:96}}>What's the best</Text>
+                <Image source={require('./img/favicon.png')} />
+                <Image source={require('./img/favicon.png')} />
+                <Image source={require('./img/favicon.png')} />
+                <Image source={require('./img/favicon.png')} />
+                <Image source={require('./img/favicon.png')} />
+                <Text style={{fontSize:96}}>Framework around?</Text>
+                <Image source={require('./img/favicon.png')} />
+                <Image source={require('./img/favicon.png')} />
+                <Image source={require('./img/favicon.png')} />
+                <Image source={require('./img/favicon.png')} />
+                <Image source={require('./img/favicon.png')} />
+                <Text style={{fontSize:80}}>React Native</Text>
+            </ScrollView>
+        );
+    }
+}
+
+class HorizontalScrollView extends Component{
+    render(){
+        return(
+            <ScrollView horizontal={true}>
+                <Text style={{fontSize:25}}>let us</Text>
+                <Image source={require('./img/favicon.png')} />
+                <Image source={require('./img/favicon.png')} />
+                <Image source={require('./img/favicon.png')} />
+                <Image source={require('./img/favicon.png')} />
+                <Image source={require('./img/favicon.png')} />
+                <Text style={{fontSize:25}}>  see the movie </Text>
+                <Image source={require('./img/favicon.png')} />
+                <Image source={require('./img/favicon.png')} />
+                <Image source={require('./img/favicon.png')} />
+                <Image source={require('./img/favicon.png')} />
+                <Image source={require('./img/favicon.png')} />
+                <Image source={require('./img/favicon.png')} />
+                <Image source={require('./img/favicon.png')} />
+                <Image source={require('./img/favicon.png')} />
+                <Image source={require('./img/favicon.png')} />
+                <Image source={require('./img/favicon.png')} />
+                <Text style={{fontSize:35}}>机械师2</Text>
+            </ScrollView>
+        );
+    }
+}
+
+class ListViewBasics extends Component{
+    constructor(props){
+        super(props);
+        const ds = new ListView.DataSource({rowHasChanged: function (r1, r2) {
+            r1 !== r2
+        }});
+        this.state={
+          dataSource: ds.cloneWithRows([
+              'John','Joel','James','Jimmy','Jackson','Jillian','Julie','Devin'
+          ])
+        };
+    }
+
+    render(){
+      return(
+          <View style={{flex: 1, paddingTop: 22}}>
+              <ListView
+                dataSource={this.state.dataSource}
+                renderRow={(rowData) => <Text>{rowData}</Text>}
+              />
+          </View>
+      );
+    }
 }
 
 const styles = StyleSheet.create({
@@ -300,4 +392,4 @@ const styles = StyleSheet.create({
   }
 );
 
-AppRegistry.registerComponent('HelloWorld', () => PizzaTranslator);
+AppRegistry.registerComponent('HelloWorld', () => ListViewBasics);
