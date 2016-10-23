@@ -53,7 +53,8 @@
 // AppRegistry.registerComponent('HelloWorld', () => HelloWorld);
 import React, { Component } from 'react';
 import {AppRegistry, StyleSheet, Text,Image, View, TextInput,
-    ScrollView, ListView, TouchableOpacity, TouchableHighlight} from 'react-native';
+    ScrollView, ListView, TouchableOpacity} from 'react-native';
+import Button from './src/component/button';
 
 class HelloWorldApp extends Component{
   render(){
@@ -397,24 +398,16 @@ class ButtonDemo extends Component{
                 <TouchableOpacity style={styles.buttons}>
                     <Text>确定</Text>
                 </TouchableOpacity >
-                <TouchableHighlight style={styles.buttons}
-                    onPress={ this.onPressClick}>
-                    <Text>确定</Text>
-                </TouchableHighlight>
+                <Button text="确定" beijingyanse="red"
+                        date="2016-10-23" object={{a:"b"}}
+                        onClick={()=>{
+                            alert("点击事件传入");
+                        }}/>
             </View>
         );
     }
 }
 const styles = StyleSheet.create({
-    buttons:{
-        width: 150,
-        height:40,
-        borderRadius:20,
-        backgroundColor:"green",
-        justifyContent:"center",
-        alignItems: 'center',
-        overflow:"hidden"
-    },
     bigblue:{
       color:'blue',
       fontWeight:'bold',
