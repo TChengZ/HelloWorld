@@ -52,7 +52,9 @@
 //
 // AppRegistry.registerComponent('HelloWorld', () => HelloWorld);
 import React, { Component } from 'react';
-import {AppRegistry, StyleSheet, Text,Image, View, TextInput, ScrollView, ListView} from 'react-native';
+import {AppRegistry, StyleSheet, Text,Image, View, TextInput,
+    ScrollView, ListView, TouchableOpacity} from 'react-native';
+import Button from './src/component/button';
 
 class HelloWorldApp extends Component{
   render(){
@@ -380,6 +382,31 @@ class ListViewBasics extends Component{
     }
 }
 
+class ButtonDemo extends Component{
+    constructor(props){
+        super(props);
+        this.state={
+          status: 1
+        };
+    }
+    onPressClick = () => {
+            alert("我按下了按钮，当前状态是:" + this.state.status);
+    };
+    render(){
+        return(
+            <View>
+                <TouchableOpacity style={styles.buttons}>
+                    <Text>确定</Text>
+                </TouchableOpacity >
+                <Button text="确定" beijingyanse="red"
+                        date="2016-10-23" object={{a:"b"}}
+                        onClick={()=>{
+                            alert("点击事件传入");
+                        }}/>
+            </View>
+        );
+    }
+}
 const styles = StyleSheet.create({
     bigblue:{
       color:'blue',
@@ -392,4 +419,4 @@ const styles = StyleSheet.create({
   }
 );
 
-AppRegistry.registerComponent('HelloWorld', () => ListViewBasics);
+AppRegistry.registerComponent('HelloWorld', () => ButtonDemo);
