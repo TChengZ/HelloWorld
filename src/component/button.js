@@ -14,10 +14,10 @@ export default class Button extends Component{
             disabled: false
         };
     }
-    onPressClick = () => {
+    onPressClick = (enableCallback) => {
         console.log(1)
         const{onClick} = this.props;
-        this.props.onClick();
+        this.props.onClick('canshu');
         // alert("onClick");
     };
     enable = ()=>{

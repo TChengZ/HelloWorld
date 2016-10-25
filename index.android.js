@@ -389,6 +389,18 @@ class ButtonDemo extends Component{
           status: 1
         };
     }
+    fetchData = (enableCallback) =>{
+        console.log('test')
+        console.log(enableCallback)
+        fetch('http://facebook.github.io/react-native/movies.json')
+            .then((response) => response.json())
+            .then((jsondata) => {
+                console.log(jsondata);
+            })
+            .catch((error) => {
+                console.warn(error);
+            });
+    };
     onPressClick = () => {
         //禁用按钮
         console.log(2)
@@ -414,9 +426,9 @@ class ButtonDemo extends Component{
                     ref="button"
                     text="确定" beijingyanse="red"
                     date="2016-10-23" object={{a:"b"}}
-                    onClick={()=>{
-                        this.onPressClick();
-                    }}/>
+                    onClick={
+                        this.fetchData
+                    }/>
             </View>
         );
     }
