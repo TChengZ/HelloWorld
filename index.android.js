@@ -390,19 +390,33 @@ class ButtonDemo extends Component{
         };
     }
     onPressClick = () => {
-            alert("我按下了按钮，当前状态是:" + this.state.status);
+        //禁用按钮
+        console.log(2)
+        this.refs.button.disable();
+        alert("正在获取数据");
+        this.timer = setTimeout(
+            () => {
+                //可以继续使用按钮
+                console.log(4)
+                this.refs.button.enable();
+            },5000);
     };
+    componentWillUnmount(){
+        this.timer && clearTimeout(this.timer);
+    }
     render(){
         return(
             <View>
                 <TouchableOpacity style={styles.buttons}>
                     <Text>确定</Text>
                 </TouchableOpacity >
-                <Button text="确定" beijingyanse="red"
-                        date="2016-10-23" object={{a:"b"}}
-                        onClick={()=>{
-                            alert("点击事件传入");
-                        }}/>
+                <Button
+                    ref="button"
+                    text="确定" beijingyanse="red"
+                    date="2016-10-23" object={{a:"b"}}
+                    onClick={()=>{
+                        this.onPressClick();
+                    }}/>
             </View>
         );
     }

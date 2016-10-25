@@ -11,17 +11,32 @@ export default class Button extends Component{
     constructor(props){
         super(props);
         this.state={
-            status: 1
+            disabled: false
         };
     }
     onPressClick = () => {
+        console.log(1)
         const{onClick} = this.props;
         this.props.onClick();
+        // alert("onClick");
+    };
+    enable = ()=>{
+        console.log(5)
+        this.setState(
+            {disabled: false}
+        );
+    };
+    disable = ()=>{
+        console.log(3)
+        this.setState(
+            {disabled: true}
+        );
     };
     render(){
         const {text, beijiingyanse} = this.props;
         return(
-            <TouchableHighlight style={[styles.buttons, {backgroundColor:this.props.beijingyanse}]}
+            <TouchableHighlight style={[styles.buttons, this.state.disabled && styles.disabled]}
+                                disabled={this.state.disabled}
                                 onPress={ this.onPressClick}>
                 <Text>{this.props.text}</Text>
             </TouchableHighlight>
@@ -38,6 +53,9 @@ const styles = StyleSheet.create({
             justifyContent:"center",
             alignItems: 'center',
             overflow:"hidden"
+        },
+        disabled:{
+            backgroundColor: 'gray'
         }
     }
 );
