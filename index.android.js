@@ -395,7 +395,9 @@ class ButtonDemo extends Component{
         fetch('http://facebook.github.io/react-native/movies.json')
             .then((response) => response.json())
             .then((jsondata) => {
-                console.log(jsondata);
+                this.setState({
+                    title: jsondata.movies[0].title
+                });
             })
             .catch((error) => {
                 console.warn(error);
@@ -420,7 +422,7 @@ class ButtonDemo extends Component{
         return(
             <View>
                 <TouchableOpacity style={styles.buttons}>
-                    <Text>确定</Text>
+                    <Text>{this.state.title? this.state.title: null}</Text>
                 </TouchableOpacity >
                 <Button
                     ref="button"
