@@ -53,8 +53,9 @@
 // AppRegistry.registerComponent('HelloWorld', () => HelloWorld);
 import React, { Component } from 'react';
 import {AppRegistry, StyleSheet, Text,Image, View, TextInput,
-    ScrollView, ListView, TouchableOpacity} from 'react-native';
+    ScrollView, ListView, TouchableOpacity, Navigator} from 'react-native';
 import Button from './src/component/button';
+import MyScene from  './src/MyScene';
 
 class HelloWorldApp extends Component{
   render(){
@@ -435,6 +436,47 @@ class ButtonDemo extends Component{
         );
     }
 }
+
+class YoDawgApp extends Component{
+    render(){
+        return(
+            <MyScene/>
+        )
+    }
+}
+
+class SimpleNavigationApp extends Component {
+    render() {
+        return(
+            <Navigator
+                initialRoute={{title: 'My Initial Scene', index: 0}}
+                renderScene={(route, navigator) =>{
+                                return <MyScene
+                                         title = {route.title}
+                                          onForward={
+                                               ()=>{
+                                                    const nextIndex = route.index + 1;
+                                                    navigator.push({
+                                                        title: 'Scene ' + nextIndex,
+                                                        index: nextIndex
+                                                    });
+                                               }
+                                          }
+                                          onBack={
+                                            ()=>{
+                                                if(route.index > 0){
+                                                    navigator.pop();
+                                                }
+                                            }
+                                          }
+                                        />
+                        }
+                }
+            />
+        );
+    }
+}
+
 const styles = StyleSheet.create({
     bigblue:{
       color:'blue',
@@ -447,4 +489,4 @@ const styles = StyleSheet.create({
   }
 );
 
-AppRegistry.registerComponent('HelloWorld', () => ButtonDemo);
+AppRegistry.registerComponent('HelloWorld', () => SimpleNavigationApp);
