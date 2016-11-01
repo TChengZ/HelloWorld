@@ -54,7 +54,7 @@
 import React, { Component } from 'react';
 import {AppRegistry, StyleSheet, Text,Image, View, TextInput,
     ScrollView, ListView, TouchableOpacity, Navigator, NavigationExperimental, PixelRatio, TouchableHighlight, TouchableNativeFeedback,
-    ViewPagerAndroid, Animated} from 'react-native';
+    ViewPagerAndroid, Animated, InteractionManager} from 'react-native';
 import Button from './src/component/button';
 import MyScene from  './src/MyScene';
 import type, { ViewPagerScrollState } from 'ViewPagerAndroid';
@@ -658,6 +658,59 @@ class Playground extends Component{
     }
 }
 
+class ExpensiveScene extends Component{
+
+    constructor(props, context){
+        super(props, context);
+        this.state={
+            renderPlaceholderOnly: true
+        };
+        // this._renderPlaceHolderView = this._renderPlaceHolderView.bind(this);
+    }
+
+    componentWillUnmount(){
+        this.timer && clearTimeout(this.timer);
+    }
+
+    componentDidMount(){
+        // InteractionManager.runAfterInteractions(
+        //     () =>{
+        //         this.setState({
+        //             renderPlaceholderOnly: false
+        //         });
+        //     }
+        // );
+        console.log(0)
+        this.timer = setTimeout(
+            () => {
+                console.log(1)
+                this.setState({
+                    renderPlaceholderOnly: false
+                });
+            },5000);
+    }
+
+    render(){
+        if (this.state.renderPlaceholderOnly) {
+            return this._renderPlaceHolderView();
+        }
+
+        return (
+            <View>
+                <Text>Your Full vie goes here</Text>
+            </View>
+        );
+    }
+
+    _renderPlaceHolderView(){
+        return(
+            <View>
+                <Text>Loading.....</Text>
+            </View>
+        );
+    }
+}
+
 const styles = StyleSheet.create({
     bigblue:{
       color:'blue',
@@ -696,4 +749,4 @@ const styles = StyleSheet.create({
   }
 );
 
-AppRegistry.registerComponent('HelloWorld', () => Playground);
+AppRegistry.registerComponent('HelloWorld', () => ExpensiveScene);
